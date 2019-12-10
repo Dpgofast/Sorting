@@ -56,16 +56,21 @@ number of items. However, it is often used as a subroutine in another sorting
 algorithm, radix sort, that can handle larger keys more efficiently"."""
 
 
-def count_sort(arr, maximum=-1):
+def count_sort(arr):
     # The range of possible positive integers given the max
-    m = maximum + 1
+    if len(arr) <= 0:
+        return arr
+    m = max(arr)
+    m = m+1
     # init a counter with places for possible integers populated with zeros
-    # ex:| 0 | 1 | 2 | 3 | 4 | 6 |
+    # ex:| 0 | 1 | 2 | 3 | 4 | 5 |
     #    | 0 | 0 | 0 | 0 | 0 | 0 |
     count = [0] * m
     # Loop through list and count occurences of a given int
     # save a running total to the corresponding column in count list
     for x in arr:
+        if x < 0:
+            return str('Error, negative numbers not allowed in Count Sort')
         count[x] += 1
     # initialize a counter from 0 to maximum
     i = 0
